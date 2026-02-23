@@ -1,0 +1,42 @@
+Cheat sheet
+
+Mô hình machine learning đều hiểu 0/1 = False/True → hoạt động bình thường với cả regression, tree-based, NN.
+
+df = pd.get_dummies(df, columns=['ocean_proximity'], prefix='ocean')
+
+
+1) Số category (unique values) ít
+
+≤ 10 category → coi là “ít”
+
+Ví dụ: ocean_proximity (5 category) → ít → One-Hot vẫn gọn, không lo nổ cột
+
+Lý do: 10 cột One-Hot vẫn nhỏ, dataset vẫn “rộng vừa phải”, mô hình train nhanh.
+
+2) Số category trung bình
+
+10–50 category → trung bình
+
+One-Hot vẫn làm được, nhưng nếu dataset lớn → cột tăng nhanh → có thể nhóm category hiếm hoặc dùng embedding (cho NN)
+
+3) Số category nhiều
+
+> 50–100 category → nhiều
+
+One-Hot → nổ cột, sparse, train chậm, dễ overfit
+
+Giải pháp:
+
+Nhóm category hiếm thành OTHER
+
+Dùng target encoding / frequency encoding
+
+Dùng embedding nếu NN
+
+💡 Tóm gọn:
+
+Category ít → ≤ 10 → One-Hot gọn gàng
+
+Trung bình → 10–50 → cân nhắc grouping hoặc sparse
+
+Nhiều → >50 → tránh One-Hot trực tiếp

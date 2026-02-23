@@ -1,0 +1,7 @@
+3. Gợi ý thực tế:
+
+Với data nhỏ, mô hình đơn giản → GridSearchCV.
+
+Với data lớn hoặc nhiều hyperparameter → RandomizedSearchCV hoặc Optuna.
+
+Với NN / GBM mạnh → Bayesian tuning (Optuna/Hyperopt) thường hiệu quả hơn.

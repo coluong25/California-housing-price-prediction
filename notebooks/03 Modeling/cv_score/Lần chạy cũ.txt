@@ -1,0 +1,118 @@
+# {'lr': {
+    # mean': np.float64(-27835.559454153576),
+#   'std': np.float64(8772.421858392549),
+#   'risk_adjusted': np.float64(-28274.180547073203)},
+#  'ridge': {
+    # 'mean': np.float64(-27835.171274017997),
+#   'std': np.float64(8774.121319958642),
+#   'risk_adjusted': np.float64(-28273.87734001593)},
+#  'lasso': {
+    #'mean': np.float64(-27835.23249633665),
+#   'std': np.float64(8773.146493484199),
+#   'risk_adjusted': np.float64(-28273.889821010856)},
+#  'elasnet': {
+    #'mean': np.float64(-31054.432624574918),
+#   'std': np.float64(10833.109076360002),
+#   'risk_adjusted': np.float64(-31596.088078392917)},
+#  'dtree': {
+    # 'mean': np.float64(-34453.002669573645),
+#   'std': np.float64(11443.49005175168),
+#   'risk_adjusted': np.float64(-35025.17717216123)},
+#  'rf': {
+# 'mean': np.float64(-28642.97047945737),
+#   'std': np.float64(11929.385665369078),
+#   'risk_adjusted': np.float64(-29239.439762725822)},
+#  'gbr': {
+# 'mean': np.float64(-26056.749645402208),
+#   'std': np.float64(9249.587088636748),
+#   'risk_adjusted': np.float64(-26519.228999834046)},
+#  'xg': {
+# 'mean': np.float64(-25694.970417896835),
+#   'std': np.float64(7969.878186439048),
+#   'risk_adjusted': np.float64(-26093.464327218786)},
+#  'lgbm': {
+# 'mean': np.float64(-25196.732396111904),
+#   'std': np.float64(9128.331170815583),
+#   'risk_adjusted': np.float64(-25653.148954652683)},
+#  'cb': {
+# 'mean': np.float64(-22628.423495950097),
+#   'std': np.float64(6635.6817219334525),
+#   'risk_adjusted': np.float64(-22960.20758204677)},
+#  'mlp': {
+# 'mean': np.float64(-28882.799153136486),
+#   'std': np.float64(7630.168014131381),
+#   'risk_adjusted': np.float64(-29264.307553843057)}}
+
+
+
+# {'lr': {'mean': np.float64(27835.559454153576),
+#   'std': np.float64(8772.421858392549),
+#   'risk_adjusted': np.float64(27396.938361233948)},
+#  'ridge': {'mean': np.float64(27835.171274017997),
+#   'std': np.float64(8774.121319958642),
+#   'risk_adjusted': np.float64(27396.465208020065)},
+#  'lasso': {'mean': np.float64(27835.23249633665),
+#   'std': np.float64(8773.146493484199),
+#   'risk_adjusted': np.float64(27396.57517166244)},
+#  'elasnet': {'mean': np.float64(31054.432624574918),
+#   'std': np.float64(10833.109076360002),
+#   'risk_adjusted': np.float64(30512.77717075692)},
+#  'dtree': {'mean': np.float64(34453.002669573645),
+#   'std': np.float64(11443.49005175168),
+#   'risk_adjusted': np.float64(33880.82816698606)},
+#  'rf': {'mean': np.float64(28642.97047945737),
+#   'std': np.float64(11929.385665369078),
+#   'risk_adjusted': np.float64(28046.501196188918)},
+#  'gbr': {'mean': np.float64(26056.749645402208),
+#   'std': np.float64(9249.587088636748),
+#   'risk_adjusted': np.float64(25594.27029097037)},
+#  'xg': {'mean': np.float64(25694.970417896835),
+#   'std': np.float64(7969.878186439048),
+#   'risk_adjusted': np.float64(25296.476508574884)},
+#  'lgbm': {'mean': np.float64(25196.732396111904),
+#   'std': np.float64(9128.331170815583),
+#   'risk_adjusted': np.float64(24740.315837571125)},
+#  'cb': {'mean': np.float64(22628.423495950097),
+#   'std': np.float64(6635.6817219334525),
+#   'risk_adjusted': np.float64(22296.639409853426)},
+#  'mlp': {'mean': np.float64(28882.799153136486),
+#   'std': np.float64(7630.168014131381),
+#   'risk_adjusted': np.float64(28501.290752429915)}}
+
+# {'lr': {'mean': np.float64(0.13456503118986723),
+#   'std': np.float64(0.04240838855527727),
+#   'risk_adjusted': np.float64(0.13244461176210337)},
+#  'ridge': {'mean': np.float64(0.1345631546164095),
+#   'std': np.float64(0.0424166042370574),
+#   'risk_adjusted': np.float64(0.13244232440455664)},
+#  'lasso': {'mean': np.float64(0.13456345058255426),
+#   'std': np.float64(0.042411891647926435),
+#   'risk_adjusted': np.float64(0.13244285600015793)},
+#  'elasnet': {'mean': np.float64(0.1501259818970872),
+#   'std': np.float64(0.05237033813330068),
+#   'risk_adjusted': np.float64(0.14750746499042217)},
+#  'dtree': {'mean': np.float64(0.16655563853321279),
+#   'std': np.float64(0.0553210938070483),
+#   'risk_adjusted': np.float64(0.16378958384286038)},
+#  'rf': {'mean': np.float64(0.13846828630431887),
+#   'std': np.float64(0.05767005174730942),
+#   'risk_adjusted': np.float64(0.1355847837169534)},
+#  'gbr': {'mean': np.float64(0.12596575738005875),
+#   'std': np.float64(0.044715141333007025),
+#   'risk_adjusted': np.float64(0.12373000031340839)},
+#  'xg': {'mean': np.float64(0.12421681343972626),
+#   'std': np.float64(0.038528663614755584),
+#   'risk_adjusted': np.float64(0.12229038025898849)},
+#  'lgbm': {'mean': np.float64(0.12180818877917673),
+#   'std': np.float64(0.04412895565240537),
+#   'risk_adjusted': np.float64(0.11960174099655646)},
+#  'cb': {'mean': np.float64(0.10939225125060958),
+#   'std': np.float64(0.032078777484199815),
+#   'risk_adjusted': np.float64(0.10778831237639959)},
+#  'mlp': {'mean': np.float64(0.1396276864955386),
+#   'std': np.float64(0.036886407779826616),
+#   'risk_adjusted': np.float64(0.1377833661065473)}}
+
+models_cv= list trên 
+models_cv= pd.DataFrame(models_cv)
+models_cv

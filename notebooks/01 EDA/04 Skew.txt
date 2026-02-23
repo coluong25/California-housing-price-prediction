@@ -1,0 +1,244 @@
+Khi dữ liệu bị right-skewed hoặc left-skewed, nghĩa là phân phối mất cân bằng, có đuôi dài và có thể chứa giá trị cực đoan.
+
+Sử dụng nhanh 
+Hỏi: có giá trị đại diện nào không, và có công cụ library nào tính giá trị này => mới tiếp tục phân tích
+
+from scipy.stats import skew
+skew_value = skew(data['column'])
+
+| Skew(value)         | Hành động phổ biến                                                  |
+| ------------------- | ------------------------------------------------------------------- |
+| Nhẹ (±0.1–0.5)      | Có thể bỏ qua, dùng mean/median bình thường                         |
+| Trung bình (±0.5–1) | Xem xét log hoặc Box-Cox, đặc biệt nếu dùng regression              |
+| Cao (>1)            | Biến đổi dữ liệu gần như bắt buộc, scaler robust, kiểm tra outliers |
+
+➕ Skew > 0 → Right-skewed (lệch phải)
+
+➖ Skew < 0 → Left-skewed (lệch trái)
+
+Xử lý skewed
+
+a. Log-transform
+Chỉ áp dụng nếu giá trị > 0 (không có số âm hoặc 0).
+import numpy as np
+df['feature_log'] = np.log1p(df['feature'])  # log1p = log(1+x) tránh lỗi với 0
+
+b. Box-Cox transform
+Áp dụng được với dữ liệu dương (Box-Cox yêu cầu > 0).
+Box-Cox sẽ tìm λ tối ưu để làm dữ liệu gần chuẩn hơn.
+
+from scipy.stats import boxcox
+
+df['feature_boxcox'], fitted_lambda = boxcox(df['feature'])
+print("Optimal lambda:", fitted_lambda)
+
+c. Yeo-Johnson transform
+
+Nếu dữ liệu có cả âm/0, dùng Yeo-Johnson thay Box-Cox.
+
+from sklearn.preprocessing import PowerTransformer
+
+pt = PowerTransformer(method='yeo-johnson')
+df['feature_yeojohnson'] = pt.fit_transform(df[['feature']])
+
+
+
+
+Công thức nhanh nhận biết skew:
+
+Skewness direction≈Mean−Median
+
+Mean > Median → right-skewed (đuôi kéo dài sang phải)
+
+Mean < Median → left-skewed (đuôi kéo dài sang trái)
+
+Lý do: Mean bị ảnh hưởng mạnh bởi giá trị cực đoan (outliers), còn median thì bền hơn. Khoảng cách giữa chúng phản ánh sự lệch.
+
+
+3️⃣ Cách chuyên nghiệp hơn: Tính skewness số học
+
+Thường dùng hàm skew() từ scipy.stats hay pandas:
+
+Giá trị > 0 → right-skewed
+
+Giá trị < 0 → left-skewed
+
+Giá trị ~0 → gần đối xứng
+
+⭐Code => có giá trị đại diện nào không, và có công cụ library nào tính giá trị này => mới tiếp tục phân tích
+
+from scipy.stats import skew
+skew_value = skew(data['column'])
+
+
+
+Hướng giải quyết
+
+1️⃣ ⭐Right-skewed (đuôi kéo sang phải)
+
+Nhận biết:
+Mean > Median > Mode
+Suy ra:
+    ⭐Có nhiều giá trị nhỏ/ trung bình, nhưng tồn tại một số giá trị cực cao (outliers hợp lệ, không lỗi).
+    (Mean bị “kéo” sang phải → trung bình không phản ánh tốt giá trị điển hình.)
+
+⭐Cách xử lý / hành động:
+    Biến đổi dữ liệu (Data transformation)
+    Log-transform, Box-Cox, Yeo-Johnson → làm dữ liệu gần đối xứng hơn
+
+⭐Chọn scaler phù hợp
+    RobustScaler thay vì StandardScaler nếu chuẩn hóa
+    Mô hình học máy
+    Linear regression, SVR… có thể nhạy với skew → biến đổi trước sẽ ổn định.
+
+2️⃣ Left-skewed (đuôi kéo sang trái)
+Nhận biết:
+Mean < Median < Mode
+
+Suy ra:
+    Có nhiều giá trị lớn/ trung bình, nhưng ⭐tồn tại vài giá trị cực thấp.
+    Mean bị kéo xuống → trung bình không phản ánh đúng.
+
+Cách xử lý / hành động:
+
+    Tương tự right-skewed, nhưng có thể dùng inverse transform hoặc Box-Cox (nếu dữ liệu dương) để cân bằng.
+
+    Kiểm tra mô hình có bị ảnh hưởng bởi giá trị nhỏ cực đoan không.
+
+3️⃣ Khi nào cần làm gì?
+
+| Skew(value)         | Hành động phổ biến                                                  |
+| ------------------- | ------------------------------------------------------------------- |
+| Nhẹ (±0.1–0.5)      | Có thể bỏ qua, dùng mean/median bình thường                         |
+| Trung bình (±0.5–1) | Xem xét log hoặc Box-Cox, đặc biệt nếu dùng regression              |
+| Cao (>1)            | Biến đổi dữ liệu gần như bắt buộc, scaler robust, kiểm tra outliers |
+
+
+✅ Quy tắc dấu của skewness
+➕ Skew > 0 → Right-skewed (lệch phải)
+
+Đuôi kéo dài sang phía giá trị lớn
+
+Mean > Median
+
+Histogram nhìn sẽ “nặng” bên trái, đuôi chìa sang phải
+
+➖ Skew < 0 → Left-skewed (lệch trái)
+
+Đuôi kéo dài sang phía giá trị nhỏ
+
+Mean < Median
+
+Histogram “nặng” bên phải, đuôi chìa sang trái
+
+
+
+
+
+⭐ Tóm lại — Điều chỉnh skew mang ý nghĩa:
+👉 Tăng tính ổn định
+👉 Giảm ảnh hưởng cực đoan
+👉 Làm mô hình học chính xác hơn
+👉 Giải thích kết quả dễ hơn
+👉 Tránh bias do tail kéo lệch
+
+
+
+🎯 1. Ý nghĩa đối với bản chất dữ liệu
+
+Khi dữ liệu bị right-skewed hoặc left-skewed, nghĩa là phân phối mất cân bằng, có đuôi dài và có thể chứa giá trị cực đoan.
+
+Việc điều chỉnh skew:
+
+Giúp phân phối trở nên gần chuẩn (normal-like).
+
+Giảm ảnh hưởng bất thường của outliers hợp lệ nhưng quá lớn/quá nhỏ.
+
+Làm dữ liệu mượt hơn, dễ phân tích hơn.
+
+🎯 2. Ý nghĩa đối với thống kê (statistics)
+
+    Nhiều phép thống kê và mô hình dựa trên giả định dữ liệu “gần chuẩn”.
+
+    Khi chỉnh skew:
+
+    Mean và variance ổn định hơn, ít bị kéo lệch.
+
+    Các phép so sánh, tương quan, kiểm định chính xác hơn.
+
+    Giảm nguy cơ đưa ra kết luận sai khi EDA.
+
+🎯 3. Ý nghĩa đối với Machine Learning
+
+    Đây là lý do quan trọng nhất trong dự án ML:
+
+    Vì nhiều model giả định dữ liệu không quá skewed
+
+    Linear Regression
+
+    Logistic Regression
+
+    SVM
+
+    KNN
+
+    PCA
+
+    Neural net basic
+
+    Khi dữ liệu skewed:
+
+    Loss function trở nên khó tối ưu.
+
+    Model bị lệch trọng số, ưu tiên nhóm tail sai.
+
+    Hiện tượng heteroscedasticity → sai số không đồng đều.
+
+    Tăng variance → overfitting.
+
+    💡 Điều chỉnh skew → Training ổn định, model học đúng “pattern”, không bị lệch bởi tail.
+
+🎯 4. Ý nghĩa đối với Scaling
+
+    Nếu skew lớn:
+
+    StandardScaler dễ bị “phá” vì mean/std bị kéo lệch.
+
+    Normalization làm toàn bộ dữ liệu dính sát 0.
+
+    Sau khi giảm skew:
+
+    Scaling hoạt động đúng, dữ liệu phân bố đẹp hơn, không bị co rúm.
+
+🎯 5. Ý nghĩa đối với mô hình hóa giá nhà (your project)
+
+    California Housing Dataset thường có median_house_value bị right-skewed.
+
+    Điều chỉnh skew:
+
+    Dự báo giá nhà mượt hơn, sai số MAE/MSE giảm đáng kể.
+
+    Giúp Linear model hoặc Tree-based model hoạt động tốt hơn.
+
+    Tránh mô hình “hiểu nhầm” rằng những nhà cực đắt là quan trọng nhất.
+
+🎯 6. Ý nghĩa tổng thể trong project end-to-end
+
+    | Giai đoạn           | Lợi ích từ việc sửa skew                         |
+    | ------------------- | ------------------------------------------------ |
+    | EDA                 | Nhìn dữ liệu rõ ràng hơn, phát hiện quan hệ đúng |
+    | Data Cleaning       | Loại bỏ ảnh hưởng outlier tốt hơn                |
+    | Feature Engineering | Các tính toán ratio, log-features ổn định        |
+    | Modeling            | Mô hình dễ train, loss hội tụ nhanh hơn          |
+    | Evaluation          | Sai số phản ánh đúng chất lượng mô hình          |
+    | Deployment          | Dự báo ổn định, ít lệch pha                      |
+
+
+
+
+
+| Transform                 | Điều kiện dữ liệu   | Cách hoạt động                                                                                                | Khi dùng                                                                       | Ghi chú                                                           |
+| ------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| **Log-transform**         | Giá trị > 0         | Dùng log(x) hoặc log1p(x) → co kéo các giá trị lớn, giảm skew phải                                            | Khi dữ liệu lệch phải, positive only, muốn đơn giản                            | Không tối ưu λ, chỉ co kéo tail dài                               |
+| **Box-Cox transform**     | Giá trị > 0         | Tìm λ tối ưu để dữ liệu gần chuẩn, công thức: ( y(\lambda) = (x^\lambda -1)/\lambda ) nếu λ≠0, log(x) nếu λ=0 | Khi muốn chuẩn hóa dữ liệu lệch phải/giá trị dương, tăng tính linear cho model | Chỉ áp dụng cho positive values, λ được tính tự động để giảm skew |
+| **Yeo-Johnson transform** | Giá trị ≥ 0 hoặc âm | Tương tự Box-Cox nhưng mở rộng cho cả số âm và 0                                                              | Khi dữ liệu có cả giá trị âm/0 mà vẫn muốn giảm skew                           | Flexible, thường dùng với features mixed sign                     |

@@ -1,0 +1,6 @@
+| Loại outlier                  | Cách xử lý          |
+| ----------------------------- | ------------------- |
+| Nhập sai                      | sửa hoặc loại       |
+| True extreme (nhưng hợp lý)   | winsorize hoặc clip |
+| Giá trị hiếm nhưng quan trọng | giữ nguyên          |
+| Giá trị tách rời khỏi cluster | cân nhắc loại       |

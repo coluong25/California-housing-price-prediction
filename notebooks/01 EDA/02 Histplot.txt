@@ -1,0 +1,27 @@
+✅ Checklist khi nhìn histplot
+
+Hình dạng phân phối (Shape)
+    Đối xứng, lệch phải (right-skewed), lệch trái (left-skewed), hay đa đỉnh (multi-modal).
+
+Tâm và trung vị (Center)
+    Xác định trung bình (mean) và trung vị (median) nằm đâu trong biểu đồ.
+
+Phạm vi và khoảng biến thiên (Spread / Range)
+    Nhìn ra min, max, khoảng cách giữa các giá trị, sự lan tỏa dữ liệu.
+
+Đuôi (Tails)
+    Kiểm tra xem có đuôi dài (long tail), bất thường hay cực đoan.
+
+Outlier tiềm năng
+    Quan sát các cột tách biệt hẳn với cụm chính, đặc biệt khi cách cụm lân cận khá xa.
+
+Đỉnh / mật độ (Peaks / Density)
+    Xem dữ liệu có tập trung cao ở vùng nào, có nhiều đỉnh hay chỉ 1 đỉnh.
+
+Độ mịn của bins / binning
+    Kiểm tra histogram có quá thô hay quá mịn, vì điều này ảnh hưởng đến việc thấy rõ xu hướng.
+
+So sánh với kỳ vọng / mô hình
+    Dữ liệu có khớp với phân phối giả định (Normal, Log-normal…) không.
+
+

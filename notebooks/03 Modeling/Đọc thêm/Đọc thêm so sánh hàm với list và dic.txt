@@ -1,0 +1,64 @@
+list
+
+def iqr_outlier_table(df):
+    outlier_table = []
+    # Cách và in bảng tạo list mới tên tuỳ ý
+    for col in columns:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        lower = Q1 - 1.5 * IQR
+        upper = Q3 + 1.5 * IQR
+        
+        out_low = (df[col] < lower).sum()
+        
+        out_high = (df[col] > upper).sum()
+        out_total = out_low + out_high
+        
+        outlier_table.append({
+            'column': col,
+            'Q1': Q1.round(3),
+            'Q3': Q3.round(3),
+            'IQR': IQR.round(3),
+            'lower_bound': lower.round(3),
+            'upper_bound': upper.round(3),
+            'out_low': out_low,
+            'out_high': out_high,
+            'out_total': out_total
+        })
+    
+    return pd.DataFrame(outlier_table)
+iqr_outlier_table(df)
+
+
+dict
+
+def iqr_outlier_table(df):
+outlier_dict = {}
+
+for col in columns:
+    Q1 = df[col].quantile(0.25)
+    Q3 = df[col].quantile(0.75)
+    IQR = Q3 - Q1
+    lower = Q1 - 1.5 * IQR
+    upper = Q3 + 1.5 * IQR
+    out_low = (df[col] < lower).sum()
+    out_high = (df[col] > upper).sum()
+    out_total = out_low + out_high
+
+    outlier_dict[col] = {
+        'Q1': Q1.round(3),
+        'Q3': Q3.round(3),
+        'IQR': IQR.round(3),
+        'lower_bound': lower.round(3),
+        'upper_bound': upper.round(3),
+        'out_low': out_low,
+        'out_high': out_high,
+        'out_total': out_total
+    }
+
+print(outlier_dict)
+
+
+
+Cần học thêm trong class 

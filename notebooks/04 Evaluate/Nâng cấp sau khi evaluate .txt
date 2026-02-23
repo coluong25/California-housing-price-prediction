@@ -1,0 +1,11 @@
+# Tuning thêm
+
+# CV lại
+
+# Viết thêm loss
+
+# Scale y
+
+# Train thêm model
+
+# ⚠️ Chỉ thiếu nếu bạn muốn nâng cấp chất lượng báo cáo

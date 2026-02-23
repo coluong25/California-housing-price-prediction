@@ -1,0 +1,28 @@
+| Model             | Scale y? |
+| ----------------- | -------- |
+| Decision Tree     | ❌        |
+| Random Forest     | ❌        |
+| Gradient Boosting | ❌        |
+| XGBoost           | ❌        |
+| LightGBM          | ❌        |
+| CatBoost          | ❌        |
+
+
+
+
+| Model                      | Scale y? | Lý do |
+| -------------------------- | -------- | ----- |
+| Linear Regression          | ⚠ Có thể |       |
+| Ridge / Lasso / ElasticNet | ✅        |       |
+| SVR                        | ✅        |       |
+| MLPRegressor               | ✅        |       |
+| Bayesian Regression        | ✅        |       |
+
+
+Vì sao nên scale y?
+
+Loss dạng MSE / MAE
+
+Gradient ∝ độ lớn của y
+
+y lớn → gradient lớn → học không ổn định

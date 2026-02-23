@@ -1,0 +1,197 @@
+2 Tree đều giống nhau ở chia cột X ra làm 2 từ trung điểm danh sách đã sắp xếp
+Tính điểm của cột y tương ứng
+và tìm split tốt rồi chia tiếp
+
+1️⃣ Decision Tree thường: xử lý nối tiếp theo nhánh (split tốt => vào input đỉnh kế tiếp)
+
+Tree₁ output ──► Tree₂ input
+
+
+Boosting
+
+
+X ──► Tree₁ ──► residual₁
+X ──► Tree₂ ──► residual₂
+X ──► Tree₃ ──► residual₃
+
+
+Thay vào đó nó sẽ truyền giá trị y cho nhau
+3️⃣ Vậy cái gì được “xử lý lại từ đầu”?
+
+✔️ X được dùng lại từ đầu
+✔️ Tree được xây lại từ root
+✔️ Chỉ Y bị thay đổi
+
+Cụ thể:
+
+Tree 1 học y
+
+Tree 2 học (y − ŷ₁)
+
+Tree 3 học (y − ŷ₁ − ŷ₂)
+
+
+Decision Tree:
+
+    Dùng MSE để CHỌN SPLIT
+
+    Không dùng residual để học tiếp
+
+    Giá trị hằng số làm MSE nhỏ nhất chính là mean
+
+🔹 Tree chỉ quan tâm:
+
+“Sau khi chia bằng X,
+y trong mỗi nhóm có gần nhau hơn không?”
+
+Với mỗi node con:
+
+    Thử tất cả feature
+
+    Thử tất cả threshold
+
+    Giả lập chia
+
+    Tính MSE
+
+    Chọn split tốt nhất
+
+Key (split tốt): value(MSE)
+Chia - Tính giá trị tập hợp
+
+⭐(1 Cột X input  Y output
+    Cặp thresh hold     Y tương ứng
+        Trung điểm(trung bình) các cặp x liền kề nhau Xk và Xk+1
+        Trung điểm đó chia cột X thành 2 bên trái bé hơn và phải => Split trái và split phải
+        Tính tổng MSE từ Y tương ứng => xem MSE Split trái hay phải (tương ứng với Y) bé hơn thì chọn) => split tốt nhất
+
+
+
+
+
+
+2️⃣ Về “tại sao threshold hay rơi gần trung vị”
+
+    Nguyên nhân chính: mối quan hệ giữa input X và output y
+
+    Nếu y tăng đều theo X (hoặc có 2 “cụm” lớn), split tốt nhất là ngăn cách hai cụm (⭐ Tuyến tính dương (đi lên))
+
+    Ranh giới tự nhiên này thường nằm gần trung vị của X
+
+    quan hệ không tuyến tính => không phải ở trung vị
+
+
+4️⃣ Ví dụ trực quan hơn
+
+    Tuyến tính dương, 2 cụm rõ → threshold hay rơi gần trung vị
+
+    Tuyến tính âm → threshold vẫn có thể gần giữa nhưng không bắt buộc, còn tùy độ phân tán y
+
+    Phi tuyến / nhiễu mạnh → threshold có thể ở bất kỳ đâu
+
+
+
+
+
+Boosting (Gradient Boosting, XGBoost):
+
+Dùng residual làm target mới
+
+Cây sau học lỗi của cây trước
+
+3️⃣ lr * tree₁ có “xuất hiện” trong ŷ trước không?
+
+✔️ Có – đây là chỗ then chốt
+
+Quy trình đúng là:
+
+Bước 0 – khởi tạo
+
+    y^​0 ​= mean(y)
+=> trung điểm = tất cả giá trị đó xong gán hết vào vị trí trên tập hợp
+
+Bước 1
+
+Tree₁ học:
+    r1​ = y−y^​0​
+
+Cập nhật:
+    y^​1​ = y^​0​+lr⋅f1​(x)
+
+Bước 2
+Tree₂ học:
+    r2​ = y−y^​1​
+
+Cập nhật:
+    y^​2​ = y^​1​+lr⋅f2​(x)
+    
+
+Về r1 và f1: (Trung điểm để chia residual(leaf) )
+
+VD1:
+    Giả sử:
+⭐X:   [1, 2, 3, 4]
+
+
+y:   [2, 2, 10, 10] <=== y lấy cho vào công thức
+ŷ₀ = 6
+=> y chỉ để tính r trong này
+
+⭐r₁ = [-4, -4, 4, 4]
+
+Tree₁ học:
+x ≤ 2.5 → leaf = -4 (x1)
+x > 2.5 → leaf = 4 (x2)
+
+
+
+f₁(x) = [-4, -4, 4, 4]
+
+VD2:
+
+X = [1, 2, 3, 4]
+r₁ = [-4, -3, 4, 5]
+Split t=2.5
+Left leaf = mean([-4, -3]) = -3.5
+Right leaf = mean([4,5]) = 4.5
+f₁(x) = [-3.5, -3.5, 4.5, 4.5]
+
+
+⭐r1 xuống f1 của boosting
+ B1 Gán x1 và x2 chia làm left right theo trung điểm 2 x liền kề (Xk+Xk+1)/2
+ B2 Tính mean của x1 x2
+ B3 Thay mean vào tập hợp x1 x2 (đủ giá trị) rồi và gộp lại =>l1 
+
+
+
+
+1️⃣ Tổng “Điểm” của split thực chất đại diện cho cái gì?
+
+👉 Mức độ “lộn xộn” của Y sau khi chia
+
+    | Mục đích            | Hàm / Tham số                   |
+    | ------------------- | ------------------------------- |
+    | Dừng chia lúc build | `min_impurity_decrease`         |
+    | Phạt mỗi node       | `gamma` (XGBoost)               |
+    | Giới hạn cấu trúc   | `max_depth`, `min_samples_leaf` |
+    | Cắt cây sau build   | `ccp_alpha`                     |
+
+
+    Khi code, tree không dùng hàm của y để đếm đỉnh — nó dùng gain check và regularization để chặn việc tạo node.
+    .
+
+🌲 Cây tổng quát
+    Mỗi đỉnh bao gồm trung điểm của 2 x liền kề để chia các mốc split
+    Lá 👉 điểm kết thúc của việc chia – nơi không split nữa.
+
+
+
+    | Decision Tree    | Boosting              |
+    | ---------------- | --------------------- |
+    | 1 cây            | Nhiều cây nhỏ         |
+    | Mỗi lá = ŷ cuối | Mỗi lá = phần sửa lỗi (split đẹp) | output và input trong Pipeline
+    | Dễ hiểu          | Mạnh, chính xác       |
+    | Dễ overfit       | Ít overfit hơn        |
+
+residual ≈ RSE => độ sai lệch giá trị thực và dự đoán
+(Alt code table ≈	247)

@@ -1,0 +1,54 @@
+| Kích cỡ        | Nên dùng                                       | Lý do                           |
+| -------------- | ---------------------------------------------- | ------------------------------- |
+| Nhỏ (<10k)     | **Cross-validation**                           | Tránh mất dữ liệu khi tách      |
+| Vừa (10k–100k) | **Tùy mô hình** (CV nếu nhẹ, val-set nếu nặng) | Cân bằng chất lượng và tốc độ   |
+| Lớn (>100k)    | **Validation set**                             | CV sẽ quá chậm, không cần thiết |
+
+
+
+
+
+
+
+1) Dataset nhỏ – vừa – lớn nên hiểu thế nào?
+🔹 Nhỏ (small dataset)
+
+< 10.000 dòng
+→ Rất dễ overfit
+→ Chia train/val/test sẽ làm mất nhiều dữ liệu để train
+→ Cross-validation gần như bắt buộc
+
+Ví dụ:
+
+2000 dòng marketing
+
+5000 dòng health survey
+
+8000 dòng tài chính
+
+🔹 Vừa (medium dataset)
+
+Từ ~10.000 → 100.000 dòng
+→ Chia train/val/test OK
+→ Cross-validation vẫn tốt, nhưng tốn thời gian
+→ Tùy mô hình mới quyết định (Linear, tree thì CV nhanh; XGBoost, NN thì tốn thời gian)
+
+Ví dụ:
+
+California Housing (20k dòng)
+
+Datasets Kaggle tầm 50k
+
+🔹 Lớn (large dataset)
+
+> 100.000 – vài triệu dòng
+→ Train đủ mạnh nên không cần CV
+→ Chỉ cần train/val/test
+
+Ví dụ:
+
+500k khách hàng
+
+1M log dữ liệu
+
+Dữ liệu click, ad CTR

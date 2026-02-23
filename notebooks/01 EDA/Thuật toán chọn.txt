@@ -1,0 +1,11 @@
+Ví dụ phổ biến:
+
+Linear Regression
+
+Decision Tree Regressor
+
+Random Forest Regressor
+
+Gradient Boosting (XGBoost, LightGBM)
+
+Neural Network Regression (MLPRegressor)

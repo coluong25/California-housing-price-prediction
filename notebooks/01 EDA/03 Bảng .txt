@@ -1,0 +1,77 @@
+🎯 1. Histogram / KDE → NÊN vẽ cho tất cả các cột số
+
+Vì histogram/KDE dùng để:
+
+xem phân phối
+
+đánh giá skew
+
+phát hiện outlier
+
+chọn transform
+
+Dataset California có 8 features số + 1 target → vẽ hết OK.
+
+→ Đây là plot bắt buộc nên vẽ toàn bộ 9 cột.
+
+🎯 2. Boxplot → Chỉ cần vẽ cho các cột nghi ngờ outlier
+
+Boxplot cho tất cả cột vẫn được nhưng:
+
+Một số cột phân phối đẹp → không cần boxplot
+
+Một số cột scale quá lớn → boxplot nhìn không rõ
+
+📌 Bạn chỉ cần boxplot cho:
+
+population
+
+households
+
+median_income
+
+total_rooms
+
+total_bedrooms
+
+5 cột này thường có outlier rõ.
+
+🎯 3. Scatterplot với target → Không cần cho tất cả, chỉ cho cột quan trọng
+
+Scatterplot giữa feature và target (median_house_value) chỉ nên vẽ khi:
+
+feature là số liên tục
+
+biến đó có tương quan có ý nghĩa
+
+📌 Những cột NÊN vẽ scatter:
+
+median_income (quan trọng nhất)
+
+housing_median_age
+
+latitude / longitude (nhưng 2D scatter hoặc heatmap là tốt hơn)
+
+population (đôi khi)
+
+📌 Những cột KHÔNG cần scatter với target:
+
+total_rooms
+
+total_bedrooms
+
+households
+→ Vì scatter rất nhiễu, khó nhìn.
+
+🎯 4. Heatmap correlation → NÊN vẽ cho toàn bộ 9 cột
+
+Vì heatmap tổng quan rất hữu ích để biết:
+
+cột nào liên quan target
+
+cột nào đa cộng tuyến
+
+🎯 5. Countplot → KHÔNG cần, vì các cột đều là số
+
+Countplot chỉ dùng cho categorical.
+California Housing không có categorical (trừ ocean_proximity trong bản đầy đủ).

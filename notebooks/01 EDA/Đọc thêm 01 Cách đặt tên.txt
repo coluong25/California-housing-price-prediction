@@ -1,0 +1,16 @@
+Theo loại:
+std_scaler = StandardScaler()
+robust_scaler = RobustScaler()
+minmax_scaler = MinMaxScaler()
+
+Theo chức năng:
+numeric_scaler = StandardScaler()
+target_scaler = RobustScaler()
+feature_scaler = MinMaxScaler()
+
+Trong pipeline thì đặt luôn vào object:
+
+numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])

@@ -1,0 +1,35 @@
+| Quantile | Coverage lý tưởng |
+| -------- | ----------------- |
+| q10      | ≈ **0.10**        |
+| q50      | ≈ **0.50**        |
+| q90      | ≈ **0.90**        |
+| q10–q50  | ≈ **0.40**        |
+| q50–q90  | ≈ **0.40**        |
+| q10–q90  | ≈ **0.80**        |
+
+
+📌 Nếu là bài toán risk / finance / uncertainty:
+👉 NÊN nới q10–q90 một chút
+
+📌 Nếu là forecasting thông thường:
+👉 Kết quả hiện tại là chấp nhận được
+
+giá nhà 5-7%
+
+Nới = 
+l2_leaf_reg ↑
+depth ↓
+Khi train
+
+2️⃣ Có nên target từng thứ một không?
+
+👉 CÓ – và nên làm như vậy ✅
+
+Thứ tự chuẩn:
+
+Fix coverage trước
+
+Sau đó tối ưu pinball loss
+
+
+điều chỉnh lại freeze và đóng gói model

@@ -1,0 +1,27 @@
+🎯 2. Quy tắc chuyên nghiệp hay dùng hơn
+
+Thay vì 50–60%, người ta dùng:
+
+🔹 0–5%
+
+→ Impute đơn giản (median/mean/mode).
+
+🔹 5–25%
+
+→ Impute cẩn thận, dùng KNNImputer, IterativeImputer.
+
+🔹 25–40%
+
+→ Đánh giá xem có quan hệ với target hay không.
+
+Nếu quan trọng → giữ và impute nâng cao.
+
+Nếu không quan trọng → drop.
+
+🔹 > 40–50%
+
+→ Chỉ giữ nếu biến cực kỳ quan trọng hoặc chứa thông tin domain đặc biệt.
+
+🔹 > 60–70%
+
+→ 90% trường hợp drop vì tính toán phức tạp và dễ gây nhiễu.

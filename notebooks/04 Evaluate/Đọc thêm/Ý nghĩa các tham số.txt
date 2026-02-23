@@ -1,0 +1,105 @@
+🧠 CHEAT SHEET THAM SỐ MODEL (TỔNG QUÁT)
+
+coverage cần chỉnh: iterations và l2_leaf_reg
+loss cần chỉnh: depth và learning rate - bias (tail)
+
+
+| Param           | Min  | Max          | Ghi chú                                              |
+| --------------- | ---- | ------------ | ---------------------------------------------------- |
+| `depth`         | 3    | 12           | Quá thấp → underfit, quá cao → overfit + chậm        |
+| `learning_rate` | 0.01 | 0.3          | Nhỏ quá → học lâu, lớn quá → mất ổn định             |
+| `l2_leaf_reg`   | 1    | 10 (hoặc 20) | Phạt L2, nhỏ → overfit, lớn → underfit               |
+| `iterations`    | 100  | 2000+        | Tùy dataset, có early stopping thì không cần quá cao (ảnh hưởng underfit và overfit) |
+
+learning_rate=0.035    # thấp → học chậm, ổn định => càng cao => trừ nhanh residual cây càng học nhanh và ấy
+
+
+iterations ảnh hưởng nhiều nhất đến cây
+
+
+
+
+1️⃣ Nhóm Capacity / Complexity
+👉 Quyết định model học mạnh đến đâu
+
+| Tham số                       | Dùng khi nào | Tác dụng       | Dấu hiệu chỉnh                   |
+| ----------------------------- | ------------ | -------------- | -------------------------------- |
+| `depth` / `max_depth`         | Tree-based   | Độ sâu cây     | underfit → tăng / overfit → giảm |
+| `n_estimators` / `iterations` | Ensemble     | Số cây         | loss train còn giảm → tăng       |
+| `num_leaves`                  | LightGBM     | Độ phức tạp lá | quá lớn → overfit                |
+
+
+👉 Rule
+•	Underfit → tăng capacity
+•	Overfit → giảm capacity + regularization
+________________________________________
+
+2️⃣ Nhóm Learning dynamics
+👉 Cách model học theo thời gian
+
+| Tham số         | Tác dụng      |
+| --------------- | ------------- |
+| `learning_rate` | Bước cập nhật |
+| `iterations`    | Số bước học   |
+
+🔥 Combo chuẩn
+learning_rate ↓  ⇒ iterations ↑
+learning_rate ↑  ⇒ iterations ↓
+
+👉 Quantile / uncertainty → learning_rate nên nhỏ
+________________________________________
+3️⃣ Nhóm Regularization
+
+👉 Chống overfit
+| Tham số             | Model    | Ý nghĩa            |
+| ------------------- | -------- | ------------------ |
+| `l2_leaf_reg`       | CatBoost | Phạt độ lớn lá     |
+| `lambda_l2`         | LGBM     | L2                 |
+| `alpha`             | Lasso    | L1                 |
+| `min_child_samples` | LGBM     | Lá phải đủ dữ liệu |
+
+👉 Khi nào tăng reg?
+•	coverage quá tốt nhưng loss xấu
+•	train tốt – test kém
+________________________________________
+4️⃣ Nhóm Randomness / Robustness
+👉 Làm model bớt học vẹt
+| Tham số             | Ý nghĩa                |
+| ------------------- | ---------------------- |
+| `subsample`         | Lấy ngẫu nhiên dữ liệu |
+| `colsample_bylevel` | Lấy feature            |
+| `random_strength`   | Nhiễu split (CatBoost) |
+
+👉 Quantile model rất cần randomness
+→ giúp interval không bị quá hẹp
+________________________________________
+5️⃣ Nhóm Loss / Objective
+👉 Mục tiêu học
+| Loss               | Dùng khi               |
+| ------------------ | ---------------------- |
+| `RMSE`             | dự báo trung bình      |
+| `MAE`              | outlier                |
+| `Quantile:alpha=x` | uncertainty / interval |
+| `LogCosh`          | regression ổn định     |
+
+⚠️ BayesSearchCV chỉ tối ưu 1 loss
+→ nên chạy riêng từng quantile
+________________________________________
+6️⃣ Nhóm Evaluation & Early Stop
+👉 Kiểm soát train
+
+| Tham số                 | Ý nghĩa            |
+| ----------------------- | ------------------ |
+| `eval_metric`           | metric theo dõi    |
+| `early_stopping_rounds` | dừng sớm           |
+| `use_best_model`        | lấy model tốt nhất |
+
+
+
+
+| Coverage | Interval width | Đánh giá        |
+| -------- | -------------- | --------------- |
+| ≈ target | Nhỏ            | ✅ tốt           |
+| ≈ target | Lớn            | ⚠️ underfit     |
+| ↑ cao    | Lớn            | ❌ phình giả     |
+| ↓ thấp   | Nhỏ            | ❌ overconfident |

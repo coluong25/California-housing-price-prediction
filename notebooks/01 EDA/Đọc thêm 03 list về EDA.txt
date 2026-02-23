@@ -1,0 +1,169 @@
+🎯 TOÀN BỘ MỤC TIÊU & CÔNG VIỆC TRONG EDA (End-to-End)
+I. Khởi tạo & hiểu cấu trúc dữ liệu
+Mục tiêu
+Nắm rõ dataset đang làm việc là gì, kích thước, kiểu, quy ước.
+Công việc
+    Kiểm tra kích thước: df.shape
+
+    Xem tên cột, kiểu dữ liệu: df.info()
+
+    Xem vài dòng đầu: df.head()
+
+    Phân loại biến: numerical / categorical / boolean / datetime
+
+    Kiểm tra unique values, cardinality (đặc biệt với categorical)
+
+II. Kiểm tra dữ liệu thiếu (Missing data)
+Mục tiêu
+
+    Xác định mức độ thiếu, tính quy luật thiếu → định hướng xử lý.
+
+Công việc
+
+Tính % thiếu mỗi cột
+
+    Xem missing theo pattern (MNAR, MAR)
+
+    Heatmap missing
+
+Quyết định: drop, fill, interplate, model-based imputation
+
+III. Phân phối biến đơn lẻ (Univariate analysis)
+Mục tiêu
+
+Hiểu hình dạng phân phối, tính chất dữ liệu từng cột.
+
+Công việc
+
+Histogram, KDE
+
+Skew, Kurtosis
+
+Mean, Median, Variance
+
+Check heavy-tailed, long-tail
+
+Binning & density check
+
+Nhận diện phân phối: Normal? Log-normal? Chi?
+
+IV. Kiểm tra outliers
+Mục tiêu
+
+Xác định outlier thật / outlier do lỗi, xem tác động.
+
+Công việc
+
+Boxplot, IQR rule
+
+Z-score, Modified Z-score
+
+Tìm cluster local-outlier
+
+Quyết định: giữ / winsorize / transform / robust scaler
+
+V. Quan hệ giữa biến (Bivariate / Multivariate)
+Mục tiêu
+
+Biết biến nào có ảnh hưởng thật đến target.
+
+Công việc
+
+Scatterplot, regplot
+
+Heatmap correlation
+
+Pairplot
+
+Correlation với target
+
+Categorical vs numerical (boxplot, violin)
+
+Feature-target relationship check
+
+VI. Phân tích đặc biệt cho dữ liệu địa lý / thời gian (nếu có)
+Mục tiêu
+
+Xác định pattern theo không gian / thời gian.
+
+Công việc
+
+Time series decomposition
+
+Trend / seasonality
+
+Geo heatmap (nếu có lat-long)
+
+Groupby theo tháng, năm, vùng
+
+VII. Kiểm tra data leakage & quality
+Mục tiêu
+
+Đảm bảo dataset sạch, không rò rỉ thông tin vào mô hình.
+
+Công việc
+
+Check duplicate rows
+
+Check mismatch unit
+
+Check impossible values (âm, vượt ngoài phạm vi)
+
+Tính consistency giữa các cột (ex: bedrooms > total rooms?)
+
+VIII. Feature transformation readiness
+Mục tiêu
+
+Chuẩn bị xem biến nào cần transform.
+
+Công việc
+
+Check skew → log/boxcox/yeojohnson
+
+Check constant features
+
+Check low-variance features
+
+Encoding plan cho categorical (one-hot, ordinal)
+
+IX. Scaling readiness
+Mục tiêu
+
+Quyết định phương pháp scaling phù hợp.
+
+Công việc
+
+Kiểm tra ảnh hưởng của outlier → chọn robust scaler
+
+Kiểm tra range → minmax
+
+Check distribution → standard scaler
+
+X. Kết luận EDA & định hướng Modeling
+Mục tiêu
+
+Tóm tắt insight để chuyển sang Feature Engineering & Modeling.
+
+Công việc
+
+Ghi lại insight quan trọng
+
+Gợi ý transform cho từng biến
+
+Liệt kê outlier cần quyết định
+
+Liệt kê biến liên quan mạnh đến target
+
+Đề xuất những feature cần tạo thêm (FE)
+
+Đề xuất chiến lược modeling (xử lý skew, imbalance, scaling…)
+
+✔️ Nếu bạn muốn, mình có thể tạo:
+
+Một checklist dạng bảng để dán vào notebook
+
+Một EDA pipeline code hoàn chỉnh (chỉ cần đưa vào .ipynb)
+
+Một notebook template chuẩn công ty chuẩn dữ liệu thực
+
+Auto report EDA bằng python (sweetviz / pandas-profiling)

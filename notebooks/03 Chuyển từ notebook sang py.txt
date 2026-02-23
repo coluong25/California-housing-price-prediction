@@ -1,0 +1,2 @@
+jupyter nbconvert --to script your_notebook.ipynb
+không cần lo về import vì gọi mỗi df không bị lỗi py

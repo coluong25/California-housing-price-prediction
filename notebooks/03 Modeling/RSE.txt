@@ -1,0 +1,3 @@
+RSE (Relative Squared Error) đo xem:
+
+👉 Mô hình của bạn tốt hơn việc “đoán bừa bằng trung bình” bao nhiêu

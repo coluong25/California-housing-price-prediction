@@ -1,0 +1,17 @@
+# Xử lý cột chữ
+# df['ocean_proximity'].value_counts()
+# mapping = {'<1H OCEAN': 1,'INLAND': 2,'NEAR OCEAN': 3,'NEAR BAY':4,'ISLAND':5}
+# df['ocean_proximity'] = df['ocean_proximity'].map(mapping)
+# Heatmap cho trường hợp các cột có quá nhiều điểm tương đồng, trên 0.8, -0.8 thì loại
+# df = pd.get_dummies(df, columns=['ocean_proximity'], prefix='ocean')
+df = pd.get_dummies(df, columns=['ocean_proximity'], prefix='ocean', dtype=int)
+
+
+
+# Xử lý thiếu
+# isnull trả về true false
+# median chạy với cột số
+df['total_bedrooms'].fillna(np.nan)
+df['total_bedrooms'] = df['total_bedrooms'].fillna(df['total_bedrooms'].median())
+# Thay inplace bằng cách gán luôn
+df.isnull().sum()

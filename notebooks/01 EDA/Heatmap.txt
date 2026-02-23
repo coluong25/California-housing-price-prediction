@@ -1,0 +1,31 @@
+2️⃣ Độ tương quan cho ta thấy điều gì
+
+Tương quan dương cao (+0.7 → +1):
+Biến tăng cùng biến khác → trùng thông tin, có thể redundant.
+
+Tương quan âm cao (-0.7 → -1):
+Biến tăng thì biến kia giảm → ngược chiều nhưng vẫn mạnh mối quan hệ.
+
+Tương quan gần 0 (-0.3 → +0.3):
+Biến gần như độc lập, không giải thích được nhiều cho nhau.
+
+Không thể hiện mối quan hệ phi tuyến tính (PT bậc cao)
+
+
+3️⃣ Phải làm gì từ heatmap
+
+Loại bỏ biến trùng lặp (redundant features)
+
+Nếu 2 biến tương quan > 0.8 hoặc < -0.8 → giữ 1 biến, bỏ 1 biến để giảm multicollinearity.
+
+Chọn biến cho mô hình
+
+Quan sát cột target (nếu có) → chọn biến có tương quan cao với target.
+
+Kiểm tra dữ liệu bất thường
+
+Tương quan kỳ lạ (ví dụ biến không liên quan mà corr cao) → xem lại dữ liệu, có thể là outlier hoặc lỗi đo lường.
+
+Tiền xử lý dữ liệu
+
+Nếu nhiều biến tương quan mạnh → có thể gộp thành PCA, tránh dư thừa thông tin.

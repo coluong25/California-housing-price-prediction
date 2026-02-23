@@ -1,0 +1,10 @@
+def (model,x,y,cv=5):
+    result = {}
+    for name, model in models.items():
+        score = cros_val_score(model)
+        result[name] = score.median()
+    return result()
+models = {
+    'lr':LinearRegression()
+    'xbg':make_pipeline(StandardScaler(), XGBRegressor(max_iter=10 000))
+}

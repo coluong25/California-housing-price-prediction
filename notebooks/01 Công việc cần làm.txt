@@ -1,0 +1,96 @@
+1. Hiểu dữ liệu (Exploratory Data Analysis – EDA)
+Mục tiêu: Nắm rõ cấu trúc, chất lượng và các đặc trưng chính của dữ liệu.
+Công việc:
+
+    Load dữ liệu (pandas.read_csv hoặc pd.DataFrame).
+    Xem thông tin cơ bản: df.head(), df.info(), df.describe().
+    Vẽ biểu đồ phân phối các biến số (histogram, boxplot).
+    Kiểm tra missing value (df.isnull().sum()).
+    Nhận diện outlier (bằng boxplot, IQR, hoặc nhìn histogram).
+    Xem mối quan hệ giữa các biến với giá nhà (correlation heatmap, scatter plot).
+
+2. Xử lý dữ liệu (Data Cleaning & Feature Engineering)
+
+Mục tiêu: Dữ liệu sạch, đồng nhất, và biến đổi hợp lý để mô hình học tốt.
+
+Công việc:
+
+    Xử lý missing value (imputation: mean/median/mode, hoặc drop nếu ít).
+
+    Xử lý outlier nếu cần (log-transform, capping, hoặc robust scaler).
+
+    Tạo thêm feature mới nếu hữu ích (ví dụ: rooms_per_household, bedrooms_per_room, population_per_household…).
+
+    Chuẩn hóa dữ liệu (scaling: StandardScaler, MinMaxScaler, RobustScaler…).
+
+3. Chia dữ liệu (Train/Test Split)
+
+Mục tiêu: Chuẩn bị dữ liệu để huấn luyện và đánh giá mô hình.
+
+Công việc:
+
+    Chia dữ liệu thành train/test (ví dụ 80/20).
+
+    Có thể tạo validation set hoặc dùng cross-validation.
+
+4. Chọn mô hình và huấn luyện (Modeling)
+
+Mục tiêu: Tìm được mô hình dự báo giá nhà tốt.
+
+Công việc:
+
+    Bắt đầu với baseline model: Linear Regression.
+
+    Thử các mô hình khác: Decision Tree, Random Forest, Gradient Boosting (XGBoost, LightGBM), hoặc thậm chí Neural Network.
+
+    Huấn luyện mô hình trên tập train.
+
+    Dùng hyperparameter tuning (GridSearchCV, RandomizedSearchCV).
+
+5. Đánh giá mô hình (Evaluation)
+
+Mục tiêu: Xác định hiệu quả dự đoán của mô hình.
+
+Công việc:
+
+Dùng metric phù hợp: RMSE, MAE, R².
+
+So sánh mô hình: chọn mô hình tốt nhất.
+
+Kiểm tra overfitting: so sánh train vs test error.
+
+6. Triển khai hoặc báo cáo (Deployment / Reporting)
+
+Mục tiêu: Kết quả có thể sử dụng hoặc trình bày.
+
+Công việc:
+
+Nếu triển khai: tạo pipeline (data preprocessing + model) với joblib/pickle.
+
+Nếu báo cáo: trình bày kết quả EDA, feature importance, kết quả dự đoán.
+
+Vẽ biểu đồ dự đoán vs thực tế (scatter plot).
+
+Viết summary: insight từ dữ liệu và mô hình.
+
+7. Tối ưu và nâng cao (Optional / nâng cao)
+
+Thử feature selection (giảm chiều dữ liệu nếu quá nhiều feature).
+
+Dùng ensemble hoặc stacking để cải thiện accuracy.
+
+Thử transform target (log1p) nếu giá nhà phân phối lệch.
+
+Kiểm tra mô hình với dữ liệu mới (robustness).
+
+💡 Tip: Khi làm end-to-end, bạn nên dùng notebook để thử, nhưng cuối cùng chuyển code sang script hoặc pipeline để mọi bước từ load dữ liệu đến predict đều chạy tự động.
+
+
+Median giá trị ở vị trí giữa của bộ dữ liệu đã sắp xếp
+
+
+
+[ ] Histogram/KDE          — tất cả 9 cột
+[ ] Boxplot                — 5 cột chính
+[ ] Scatter với target     — 3–4 cột
+[ ] Heatmap corr           — toàn bộ

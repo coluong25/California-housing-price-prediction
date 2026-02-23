@@ -1,0 +1,30 @@
+| Relative  | Ý nghĩa          |
+| --------- | ---------------- |
+| < 0.1     | Model rất tự tin |
+| 0.1 – 0.3 | Bình thường      |
+| > 0.3     | Không chắc       |
+| > 0.5     | Cảnh báo ⚠️      |
+
+Khi trên 0.5 kiểm tra xem 
+
+uncertainty có ý nghĩa thật không
+
+
+error = np.abs(y_test - pred_q50)
+
+import pandas as pd
+pd.DataFrame({
+    "uncertainty": uncertainty,
+    "error": error
+}).corr()
+
+Khi uncertainty lớn → sai số thường lớn
+Khi uncertainty nhỏ → sai số thường nhỏ
+
+
+| Corr          | Diễn giải                 |
+| ------------- | ------------------------- |
+| < 0.2         | Uncertainty vô nghĩa      |
+| 0.2 – 0.4     | Tạm dùng                  |
+| **0.4 – 0.6** | **TỐT 👍 (case của bạn)** |
+| > 0.6         | Rất mạnh (hiếm)           |

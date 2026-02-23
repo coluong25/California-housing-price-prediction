@@ -1,0 +1,124 @@
+CHECKLIST EDA — CHUẨN CHUYÊN NGHIỆP
+1. Load & cấu hình môi trường
+
+Load dataset (raw).
+
+Xem kích thước (shape).
+
+Xem kiểu dữ liệu (dtypes).
+
+Kiểm tra info() và mô tả tổng quan.
+
+2. Kiểm tra giá trị thiếu (Missing Data)
+
+Tính % thiếu từng cột.
+
+Heatmap missing (chỉ khi số cột < 40–50).
+
+Biểu diễn barplot % missing.
+
+Quyết định cột giữ / bỏ (ngưỡng 40–60% tuỳ domain).
+
+Kiểm tra pattern thiếu (ví dụ missing liên quan tới target).
+
+3. Thống kê mô tả (Descriptive Statistics)
+
+describe() bản numeric.
+
+Median, min, max, quantiles.
+
+Kiểm tra bất thường: min âm bất hợp lý, max out-of-domain, v.v.
+
+4. Kiểm tra phân phối từng biến (Univariate Analysis)
+
+Numeric:
+
+Histplot + KDE.
+
+Skewness, kurtosis.
+
+Boxplot để xem outliers.
+
+Log/Box-Cox cần không (chỉ đánh dấu, chưa transform ở EDA).
+
+Categorical (nếu có):
+
+Countplot.
+
+5. Outlier Exploration
+
+Boxplot từng feature.
+
+IQR range.
+
+Winsorization needs?
+
+Kiểm tra xem outlier là lỗi hay bản chất dữ liệu (trong housing, đa phần là bản chất).
+
+6. Relationship với target (Important step)
+
+Scatterplot feature ↔ target.
+
+Check nonlinear pattern.
+
+Check log-target cần không (median_house_value bị skew thường → log).
+
+Boxplot của categorical vs target.
+
+7. Kiểm tra tương quan (Correlation Analysis)
+
+Heatmap correlation (một bản focus numerical).
+
+Xác định features multicollinearity mạnh (ví dụ: total_rooms – households).
+
+Chọn top predictive features theo Pearson/Spearman (tùy dạng phân phối).
+
+8. Feature Interaction (Nâng cao)
+
+Pairplot (nếu cột < 10).
+
+Jointplot (2 feature quan trọng ↔ target).
+
+Scatter 2D + hue theo 1 feature phân loại.
+
+9. Phân tích không gian (Spatial Analysis)
+
+Áp dụng cho California Housing:
+
+Plot latitude/longitude (scatter geo).
+
+Heatmap giá nhà theo khu vực (2D density plot).
+
+Nhận diện vùng outlier giá.
+
+10. Phân phối đặc biệt của target
+
+Kiểm tra skew strongly.
+
+Kiểm tra truncated values (ví dụ median_house_value capped ở 500k).
+
+Xác định có cần modeling censored data (nâng cao).
+
+11. Data Quality Checks
+
+Duplicates.
+
+Inconsistent values.
+
+Zero-inflated columns.
+
+Constant/near-constant columns.
+
+12. Ghi nhận kết luận EDA
+
+Tạo một section kết luận sau EDA:
+
+Feature nào skew → cần transform.
+
+Missing cần impute theo chiến lược nào.
+
+Feature nào high correlation → cần xử lý collinearity.
+
+Outlier nên giữ hay hạn chế.
+
+Hướng modeling: linear vs tree-based.

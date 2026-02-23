@@ -1,0 +1,10 @@
+def columns_median(df):
+    median_table=[]
+    for col in columns:
+        median= df[col].median()
+        median_table.append({
+        'column': col,
+        'median': median
+        })
+    return pd.DataFrame(median_table)
+columns_median(df)

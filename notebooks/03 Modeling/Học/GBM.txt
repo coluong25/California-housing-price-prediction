@@ -1,0 +1,7 @@
+Các biến thể phổ biến:
+
+XGBoost (Extreme Gradient Boosting) – tối ưu tốc độ và hiệu năng.
+
+LightGBM – xử lý dữ liệu lớn nhanh, tiết kiệm bộ nhớ.
+
+CatBoost – xử lý tốt dữ liệu categorical.

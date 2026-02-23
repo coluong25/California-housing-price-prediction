@@ -1,0 +1,19 @@
+def list_iqr_outliers(df, col):
+    Q1 = df[col].quantile(0.25)
+    Q3 = df[col].quantile(0.75)
+    IQR = Q3 - Q1
+    # Cóp y phần code cần lặp vào và thay tên như thường
+    # Lọc
+    lower = Q1 - 1.5 * IQR
+    upper = Q3 + 1.5 * IQR
+
+    outliers = df[(df[col] < lower) | (df[col] > upper)].loc[:, [col]] <======
+    return outliers
+
+
+
+
+    list_iqr_outliers(df,col="total_rooms").to_csv(
+    "total_rooms_outliers.csv",
+    index=False
+)

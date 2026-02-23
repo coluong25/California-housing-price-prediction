@@ -1,0 +1,6 @@
+| Relative pinball loss | Đánh giá       |
+| --------------------- | -------------- |
+| < 3%                  | Rất tốt        |
+| 3–5%                  | Tốt            |
+| 5–8%                  | Ổn / chấp nhận |
+| > 10%                 | Cần xem lại    |

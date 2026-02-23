@@ -1,0 +1,96 @@
+| Loại phân phối              | Transform hợp lý             |
+| --------------------------- | ---------------------------- |
+| Skew phải nặng              | `log1p`, `sqrt`              |
+| Skew trái                   | `square` hoặc invert         |
+| Có outlier nhiều            | `robust scaler`, `winsorize` |
+| Phân phối đẹp, chuẩn        | Không cần transform          |
+| Tỷ lệ, bounded data         | MinMaxScaler                 |
+| Cực kỳ lệch (income, price) | log1p gần như bắt buộc       |
+
+
+
+Đọc thêm
+
+📌 2) Nhưng: Bạn KHÔNG muốn viết "mỗi cột một file" cho rối
+
+Và đây là lỗi người mới hay mắc.
+
+🔥 Cách chuyên nghiệp:
+
+Chỉ dùng transform khác nhau khi THẬT SỰ cần.
+Bạn có thể gom biến theo nhóm:
+
+📌 3) Chiến lược 3 cấp độ chuyên nghiệp (không rối)
+Level 1 — Không transform gì
+
+Chỉ scale (StandardScaler / MinMaxScaler).
+→ Dùng cho dữ liệu đã sạch, không skew nặng.
+
+Level 2 — Gom nhóm biến theo behavior
+
+Ví dụ:
+
+Nhóm A: skew nặng → log1p
+
+Nhóm B: scale vừa → StandardScaler
+
+Nhóm C: outlier nặng → RobustScaler
+
+Nhóm D: không động vào
+
+→ Vẫn rõ ràng, không rối, dễ maintain.
+
+Level 3 — Mỗi cột 1 rule nhưng trong pipeline
+
+Chuyên nghiệp nhất (đúng chuẩn scikit-learn + conda + thực tế doanh nghiệp):
+
+
+
+
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import FunctionTransformer
+import numpy as np
+
+transformer = ColumnTransformer(
+    transformers=[
+        ('log', FunctionTransformer(np.log1p), ['median_income']),
+        ('scale', StandardScaler(), ['total_rooms', 'population']),
+        ('robust', RobustScaler(), ['median_house_value'])
+    ],
+    remainder='passthrough'
+)
+
+
+
+📌 4) Vậy bạn nên chọn cách nào?
+✔ Bạn đang làm project học tập → nên chọn Level 2
+
+Gom nhóm biến theo tính chất, không mỗi cột 1 loại.
+
+✔ Khi đi làm, product/ML production → dùng Level 3 (pipeline)
+
+Dù mỗi cột khác nhau nhưng pipeline vẫn rất gọn.
+
+✔ Tránh tuyệt đối:
+
+“Một cột thì log, một cột thì sqrt, một cột thì inverse”… lung tung mà không có lý do.
+
+Transform chỉ để “đẹp biểu đồ” → sai hoàn toàn.
+
+Log biến không có skew.
+
+Scale biến có outlier nặng bằng StandardScaler.
+
+
+
+📌 5) Tóm tắt trả lời đúng câu hỏi của bạn
+
+Tôi nên dùng transform mỗi cột 1 loại để đỡ rối không?
+
+❌ Không nên cứng nhắc như vậy.
+❌ Không phải mỗi cột chỉ nên dùng 1 transform duy nhất.
+
+✔ Hãy dùng transform đúng theo phân phối.
+✔ Nhưng gom nhóm biến để pipeline gọn và chuyên nghiệp.
+✔ Nếu project nhỏ → 2–3 loại transform là đủ.

@@ -1,0 +1,29 @@
+🎯 Mục tiêu 1: Coverage thấp
+👉 Interval quá hẹp
+
+
+↑ depth
+↓ subsample
+↑ random_strength
+↓ l2_leaf_reg
+
+
+
+🎯 Mục tiêu 2: Loss lớn
+
+👉 Median sai nhiều
+
+
+↑ iterations
+↓ learning_rate
+↑ depth (nhẹ)
+
+
+🎯 Mục tiêu 3: Coverage tốt nhưng loss xấu
+
+👉 Over-smooth
+
+
+↓ depth
+↑ l2_leaf_reg
+↑ subsample

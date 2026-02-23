@@ -1,0 +1,4 @@
+np.float64(0.6731234866828087)
+w = np.ones(len(y_train))
+w[y_train>=p90] *= 2
+w[y_train>=p96] *= 0.9

@@ -1,0 +1,43 @@
+np.float64(0.6537530266343826)
+
+np.float64(0.6537530266343826)
+
+np.float64(0.6537530266343826)
+
+
+
+
+⭐np.float64(0.6440677966101694)
+l2 4000
+
+
+
+import numpy as np
+q90 = CatBoostRegressor(
+    depth= 5, #loss
+    iterations= 500, # coverage 
+    l2_leaf_reg= 4000, #coverage
+    learning_rate= 0.04, #loss
+    random_strength= 0.9601845608583428,
+    loss_function="Quantile:alpha=0.9",
+    subsample= 0.8075634815109746,
+    verbose=False
+    )
+w = np.ones(len(y_train))
+w[y_train >= np.percentile(y_train, 90)] *= 2
+
+# q90 = CatBoostRegressor(
+#     depth= 7, #loss
+#     iterations= 750, # coverage 
+#     l2_leaf_reg= 2500, #coverage
+#     learning_rate= 0.034937015946392695, #loss
+#     random_strength= 0.9601845608583428,
+#     loss_function="Quantile:alpha=0.9",
+#     subsample= 0.8075634815109746,
+#     verbose=False
+#     )
+
+q90.fit(x_train,y_train, sample_weight=w)
+
+
+np.float64(0.6440677966101694)
